@@ -3,11 +3,13 @@ package com.bosonit.BP1.infracstructure.dtos.student;
 import com.bosonit.BP1.domain.entities.Assignment;
 import com.bosonit.BP1.domain.entities.Professor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
-public class StudentFullOutputDTO{
+
+public class StudentFullOutputDTO extends StudentOutputDTO{
 
     private String id_student;
 

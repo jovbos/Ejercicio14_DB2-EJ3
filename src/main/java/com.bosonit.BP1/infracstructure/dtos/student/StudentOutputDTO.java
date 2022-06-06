@@ -3,10 +3,12 @@ package com.bosonit.BP1.infracstructure.dtos.student;
 import com.bosonit.BP1.domain.entities.Assignment;
 import com.bosonit.BP1.domain.entities.Professor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Data
-public class StudentOutputDTO extends StudentFullOutputDTO{
+
+public class StudentOutputDTO {
 
     private String id_student;
 

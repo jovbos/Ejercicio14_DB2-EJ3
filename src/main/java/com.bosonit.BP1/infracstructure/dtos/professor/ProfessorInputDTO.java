@@ -2,6 +2,7 @@ package com.bosonit.BP1.infracstructure.dtos.professor;
 
 import com.bosonit.BP1.domain.entities.Assignment;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 public class ProfessorInputDTO {
@@ -13,4 +14,5 @@ public class ProfessorInputDTO {
     private String branch;
 
     private String comments;
+
 }

@@ -25,25 +25,19 @@ public class GetStudentUseCase implements GetStudentPort {
 
     public ResponseEntity<StudentOutputDTO> getStudentId(String id, String outputType) throws Exception {
 
-        StudentOutputDTO studentOutputDTO = new StudentOutputDTO();
+        StudentFullOutputDTO studentOutputDTO = new StudentFullOutputDTO();
         Student student = repository.findById(id).orElseThrow(() -> new Exception("Student not registered."));
         if (repository.findById(id).isEmpty()) throw new CustomErrorRequest404("NOT_FOUND");
-        if (outputType != "full") outputType = "simple";
-        if (outputType == "full") {
+        if (outputType.equals("full")){
+            studentOutputDTO = modelMapper.map(student, StudentFullOutputDTO.class);
+
+        } else {
             studentOutputDTO.setId_student(student.getId_student());
             studentOutputDTO.setBranch(student.getBranch());
             studentOutputDTO.setComments(student.getComments());
             studentOutputDTO.setProfessor(student.getProfessor());
             studentOutputDTO.setHours_per_week(student.getHours_per_week());
-
-        } else {
-            studentOutputDTO = modelMapper.map(student, StudentOutputDTO.class);
         }
-        studentOutputDTO.setId_student(student.getId_student());
-        studentOutputDTO.setBranch(student.getBranch());
-        studentOutputDTO.setComments(student.getComments());
-        studentOutputDTO.setProfessor(student.getProfessor());
-        studentOutputDTO.setHours_per_week(student.getHours_per_week());
 
 
         return ResponseEntity.ok().body(studentOutputDTO);

@@ -46,4 +46,6 @@ public class Student {
 
 //    @OneToMany
 //    private List<Subject> subjects;
+
+
 }
