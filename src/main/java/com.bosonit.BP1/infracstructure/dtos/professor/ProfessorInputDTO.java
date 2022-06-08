@@ -1,15 +1,14 @@
 package com.bosonit.BP1.infracstructure.dtos.professor;
 
-import com.bosonit.BP1.domain.entities.Assignment;
+import com.bosonit.BP1.domain.entities.Person;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class ProfessorInputDTO {
 
     private String id_professor;
 
-    private Assignment assignment;
+    private Integer id_person;
 
     private String branch;
 

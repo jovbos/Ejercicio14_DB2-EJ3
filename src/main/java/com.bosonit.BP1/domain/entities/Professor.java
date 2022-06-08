@@ -2,12 +2,8 @@ package com.bosonit.BP1.domain.entities;
 
 import com.bosonit.BP1.application.stringgenerator.StringPrefixedSequenceIdGenerator;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "Professors")
@@ -30,11 +26,11 @@ public class Professor {
     private String id_professor;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Id_assignment")
-    private Assignment assignment;
+    @JoinColumn(name = "Id_person")
+    private Person person;
 
-    @OneToMany(mappedBy = "id_student", cascade = CascadeType.ALL)
-    private List<Student> studentList = new ArrayList<>();
+//    @OneToMany(mappedBy = "id_student", cascade = CascadeType.ALL)
+//    private List<Student> studentList = new ArrayList<>();
 
     @Column(name = "Comments")
     private String comments;

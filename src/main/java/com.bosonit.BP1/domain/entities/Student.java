@@ -1,5 +1,6 @@
 package com.bosonit.BP1.domain.entities;
 
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Parameter;
 import com.bosonit.BP1.application.stringgenerator.StringPrefixedSequenceIdGenerator;
 import lombok.Data;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="Students")
 @Data
+@NoArgsConstructor
 public class Student {
 
     @Id
@@ -28,24 +30,23 @@ public class Student {
     private String id_student;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Id_assignment")
-    private Assignment assignment;
+    @JoinColumn(name = "Id_person")
+    private Person person;
 
     @Column(name = "Hours_per_week")
     private Integer hours_per_week;
 
-    @Column(name = "Coments")
+    @Column(name = "Comments")
     private String comments;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Id_professor")
     private Professor professor;
 
-    @Column(name = "rama")
+    @Column(name = "Branch")
     private String branch;
 
 //    @OneToMany
 //    private List<Subject> subjects;
-
 
 }

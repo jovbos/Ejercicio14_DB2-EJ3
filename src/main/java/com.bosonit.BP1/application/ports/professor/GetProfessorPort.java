@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GetProfessorPort {
 
-    public ResponseEntity<ProfessorOutputDTO> getProfessorId(String id) throws Exception;
+    public ResponseEntity<ProfessorOutputDTO> getProfessorId(String id, String outputType) throws Exception;
 
 //    public List<ProfessorOutputDTO> getProfessorName(String name);
 

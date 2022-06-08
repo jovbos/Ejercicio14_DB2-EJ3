@@ -21,7 +21,7 @@ public class GetStudentController {
     GetStudentPort getPort;
 
     @GetMapping("/student/{id}")
-    public ResponseEntity<StudentOutputDTO> getStudentId(@PathVariable("id") String id, @RequestParam("outputType") String outputType) throws Exception {
+    public ResponseEntity<StudentOutputDTO> getStudentId(@PathVariable("id") String id, @QueryParam("outputType") String outputType) throws Exception {
 
 
         return getPort.getStudentId(id, outputType);

@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Assignments")
+@Table(name = "Persons")
 @Data
-public class Assignment {
+public class Person {
 
     @Id
     @GeneratedValue
@@ -54,4 +54,11 @@ public class Assignment {
 
     @Column(name="Termination_Date")
     private Date termination_date;
+
+    @OneToOne(mappedBy = "person")
+    private Student student;
+
+    @OneToOne(mappedBy = "person")
+    private Professor professor;
+
 }

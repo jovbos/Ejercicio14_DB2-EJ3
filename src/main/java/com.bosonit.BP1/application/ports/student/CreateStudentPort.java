@@ -5,5 +5,5 @@ import com.bosonit.BP1.infracstructure.dtos.student.StudentInputDTO;
 import com.bosonit.BP1.infracstructure.dtos.student.StudentOutputDTO;
 
 public interface CreateStudentPort {
-    public StudentFullOutputDTO addStudent(StudentInputDTO studentDTO) throws Exception ;
+    public StudentOutputDTO addStudent(StudentInputDTO studentDTO) throws Exception ;
 }

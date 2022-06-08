@@ -33,17 +33,6 @@ public class GetSubjectUseCase implements GetSubjectPort {
         }
     }
 
-//    public List<SubjectOutputDTO> getSubjectName(String name) {
-//
-//        List<SubjectOutputDTO> listDTO = new ArrayList<>();
-//        List<Subject> SubjectList = repository.findByName(name);
-//        SubjectList.forEach(p -> {
-//            SubjectOutputDTO SubjectOutputDTO = modelMapper.map(p, SubjectOutputDTO.class);
-//            listDTO.add(SubjectOutputDTO);
-//        });
-//
-//        return listDTO;
-//    }
     public List<SubjectOutputDTO> getSubjectAll() {
 
         List<SubjectOutputDTO> listDTO = new ArrayList<>();

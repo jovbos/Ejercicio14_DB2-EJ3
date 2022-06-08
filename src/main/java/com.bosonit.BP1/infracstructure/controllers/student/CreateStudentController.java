@@ -16,7 +16,7 @@ public class CreateStudentController {
     CreateStudentPort createPort;
 
     @PostMapping("/student")
-    public StudentFullOutputDTO createAssigment(@RequestBody StudentInputDTO studentDTO) throws Exception {
+    public StudentOutputDTO createAssigment(@RequestBody StudentInputDTO studentDTO) throws Exception {
 
         return createPort.addStudent(studentDTO);
 

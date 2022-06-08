@@ -1,11 +1,11 @@
-package com.bosonit.BP1.infracstructure.dtos.assignment;
+package com.bosonit.BP1.infracstructure.dtos.person;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class AssignmentOutputDTO {
+public class PersonOutputDTO {
 
     private Integer id;
 

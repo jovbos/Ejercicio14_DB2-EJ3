@@ -2,8 +2,11 @@ package com.bosonit.BP1.application.useCases.student;
 
 import com.bosonit.BP1.application.exceptions.exception404.CustomErrorRequest404;
 import com.bosonit.BP1.application.ports.student.GetStudentPort;
+import com.bosonit.BP1.domain.entities.Person;
 import com.bosonit.BP1.domain.entities.Student;
+import com.bosonit.BP1.domain.repositories.PersonRepository;
 import com.bosonit.BP1.domain.repositories.StudentRepository;
+import com.bosonit.BP1.infracstructure.dtos.person.PersonOutputDTO;
 import com.bosonit.BP1.infracstructure.dtos.student.StudentFullOutputDTO;
 import com.bosonit.BP1.infracstructure.dtos.student.StudentOutputDTO;
 import org.modelmapper.ModelMapper;
@@ -21,44 +24,31 @@ public class GetStudentUseCase implements GetStudentPort {
     ModelMapper modelMapper;
 
     @Autowired
-    StudentRepository repository;
+    StudentRepository studentRepository;
 
     public ResponseEntity<StudentOutputDTO> getStudentId(String id, String outputType) throws Exception {
 
-        StudentFullOutputDTO studentOutputDTO = new StudentFullOutputDTO();
-        Student student = repository.findById(id).orElseThrow(() -> new Exception("Student not registered."));
-        if (repository.findById(id).isEmpty()) throw new CustomErrorRequest404("NOT_FOUND");
+        StudentOutputDTO studentOutputDTO;
+        Student student = studentRepository.findById(id).orElseThrow(() -> new CustomErrorRequest404("STUDENT NOT REGISTERED"));
         if (outputType.equals("full")){
-            studentOutputDTO = modelMapper.map(student, StudentFullOutputDTO.class);
+            StudentFullOutputDTO studentFullOutputDTO = modelMapper.map(student, StudentFullOutputDTO.class);
+            studentFullOutputDTO.setId_person(student.getPerson().getId());
+            studentFullOutputDTO.setPersonOutputDTO(modelMapper.map(student.getPerson(), PersonOutputDTO.class));
+
+
+            return ResponseEntity.ok().body(studentFullOutputDTO);
 
         } else {
-            studentOutputDTO.setId_student(student.getId_student());
-            studentOutputDTO.setBranch(student.getBranch());
-            studentOutputDTO.setComments(student.getComments());
-            studentOutputDTO.setProfessor(student.getProfessor());
-            studentOutputDTO.setHours_per_week(student.getHours_per_week());
+            studentOutputDTO = modelMapper.map(student, StudentOutputDTO.class);
+
+            return ResponseEntity.ok().body(studentOutputDTO);
         }
-
-
-        return ResponseEntity.ok().body(studentOutputDTO);
-
     }
 
-//    public List<StudentOutputDTO> getStudentName(String name) {
-//
-//        List<StudentOutputDTO> listDTO = new ArrayList<>();
-//        List<Student> StudentList = repository.findByName(name);
-//        StudentList.forEach(p -> {
-//            StudentOutputDTO StudentOutputDTO = modelMapper.map(p, StudentOutputDTO.class);
-//            listDTO.add(StudentOutputDTO);
-//        });
-//
-//        return listDTO;
-//    }
     public List<StudentOutputDTO> getStudentAll() {
 
         List<StudentOutputDTO> listDTO = new ArrayList<>();
-        List<Student> StudentList = repository.findAll();
+        List<Student> StudentList = studentRepository.findAll();
         StudentList.forEach(p -> {
             StudentOutputDTO StudentOutputDTO = modelMapper.map(p, StudentOutputDTO.class);
             listDTO.add(StudentOutputDTO);
