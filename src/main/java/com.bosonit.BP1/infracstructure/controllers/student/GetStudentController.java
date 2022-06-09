@@ -4,6 +4,7 @@ import com.bosonit.BP1.application.ports.student.GetStudentPort;
 import com.bosonit.BP1.domain.entities.Student;
 import com.bosonit.BP1.infracstructure.dtos.student.StudentFullOutputDTO;
 import com.bosonit.BP1.infracstructure.dtos.student.StudentOutputDTO;
+import com.bosonit.BP1.infracstructure.dtos.subject.SubjectOutputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,15 +28,16 @@ public class GetStudentController {
         return getPort.getStudentId(id, outputType);
     }
 
-//    @GetMapping("/Student/name/{name}")
-//    public List<StudentOutputDTO> getStudentName(@PathVariable("name") String name) {
-//
-//        return getPort.getStudentName(name);
-//    }
 
     @GetMapping("/student")
     public List<StudentOutputDTO> getStudentAll() {
 
         return getPort.getStudentAll();
+    }
+
+    @GetMapping("/student/subjectList/{id}")
+    public List<SubjectOutputDTO> getSubjectList(@PathVariable("id") String id) {
+
+        return getPort.getStudentSubjects(id);
     }
 }

@@ -7,6 +7,8 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Students")
@@ -46,7 +48,7 @@ public class Student {
     @Column(name = "Branch")
     private String branch;
 
-//    @OneToMany
-//    private List<Subject> subjects;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Subject> subjectList = new ArrayList<>();
 
 }

@@ -59,6 +59,6 @@ public class CreateProfessorUseCase implements CreateProfessorPort {
             professorOutputDTO.setId_professor(professor.getId_professor());
 
             return professorOutputDTO;
-        } else throw new CustomErrorRequest404("PROFESSOR ALREADY REGISTERED");
+        } else throw new CustomErrorRequest404("PERSON ALREADY REGISTERED");
     }
 }

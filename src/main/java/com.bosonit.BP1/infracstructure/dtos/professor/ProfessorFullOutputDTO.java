@@ -7,5 +7,5 @@ import java.util.Date;
 @Data
 public class ProfessorFullOutputDTO extends ProfessorOutputDTO {
 
-    PersonOutputDTO personOutputDTO;
+    PersonOutputDTO person;
 }

@@ -1,6 +1,5 @@
 package com.bosonit.BP1.infracstructure.dtos.professor;
 
-import com.bosonit.BP1.domain.entities.Person;
 import lombok.Data;
 
 @Data

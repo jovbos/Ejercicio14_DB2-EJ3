@@ -44,6 +44,4 @@ public class GetSubjectUseCase implements GetSubjectPort {
 
         return listDTO;
     }
-
-
 }

@@ -11,7 +11,7 @@ public class SubjectInputDTO {
 
     private String id_subject;
 
-    private Student student;
+    private String id_student;
 
     private String name;
 

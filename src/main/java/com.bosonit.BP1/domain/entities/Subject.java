@@ -29,7 +29,7 @@ public class Subject {
     private String id_subject;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Id_Student")
+    @JoinColumn(name = "Id_student")
     private Student student;
 
     @Column(name = "Name_subject")

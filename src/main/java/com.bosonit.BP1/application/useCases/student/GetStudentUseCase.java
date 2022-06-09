@@ -3,12 +3,15 @@ package com.bosonit.BP1.application.useCases.student;
 import com.bosonit.BP1.application.exceptions.exception404.CustomErrorRequest404;
 import com.bosonit.BP1.application.ports.student.GetStudentPort;
 import com.bosonit.BP1.domain.entities.Person;
+import com.bosonit.BP1.domain.entities.Professor;
 import com.bosonit.BP1.domain.entities.Student;
+import com.bosonit.BP1.domain.entities.Subject;
 import com.bosonit.BP1.domain.repositories.PersonRepository;
 import com.bosonit.BP1.domain.repositories.StudentRepository;
 import com.bosonit.BP1.infracstructure.dtos.person.PersonOutputDTO;
 import com.bosonit.BP1.infracstructure.dtos.student.StudentFullOutputDTO;
 import com.bosonit.BP1.infracstructure.dtos.student.StudentOutputDTO;
+import com.bosonit.BP1.infracstructure.dtos.subject.SubjectOutputDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +36,16 @@ public class GetStudentUseCase implements GetStudentPort {
         if (outputType.equals("full")){
             StudentFullOutputDTO studentFullOutputDTO = modelMapper.map(student, StudentFullOutputDTO.class);
             studentFullOutputDTO.setId_person(student.getPerson().getId());
-            studentFullOutputDTO.setPersonOutputDTO(modelMapper.map(student.getPerson(), PersonOutputDTO.class));
+            studentFullOutputDTO.setId_professor(student.getProfessor().getId_professor());
+            studentFullOutputDTO.setPerson(modelMapper.map(student.getPerson(), PersonOutputDTO.class));
 
 
             return ResponseEntity.ok().body(studentFullOutputDTO);
 
         } else {
             studentOutputDTO = modelMapper.map(student, StudentOutputDTO.class);
+            studentOutputDTO.setId_person(student.getPerson().getId());
+            studentOutputDTO.setId_professor(student.getProfessor().getId_professor());
 
             return ResponseEntity.ok().body(studentOutputDTO);
         }
@@ -50,12 +56,29 @@ public class GetStudentUseCase implements GetStudentPort {
         List<StudentOutputDTO> listDTO = new ArrayList<>();
         List<Student> StudentList = studentRepository.findAll();
         StudentList.forEach(p -> {
-            StudentOutputDTO StudentOutputDTO = modelMapper.map(p, StudentOutputDTO.class);
-            listDTO.add(StudentOutputDTO);
+            StudentOutputDTO studentOutputDTO = modelMapper.map(p, StudentOutputDTO.class);
+            studentOutputDTO.setId_person(p.getPerson().getId());
+            studentOutputDTO.setId_professor(p.getProfessor().getId_professor());
+            listDTO.add(studentOutputDTO);
         });
 
         return listDTO;
     }
 
+    public List<SubjectOutputDTO> getStudentSubjects(String id) {
+
+        Student student = studentRepository.findById(id).orElseThrow(() -> new CustomErrorRequest404("STUDENT NOT REGISTERED"));
+        List<Subject> studentList = student.getSubjectList();
+        List<SubjectOutputDTO> listDTO = new ArrayList<>();
+
+        studentList.forEach(subject -> {
+            SubjectOutputDTO subjectOutputDTO = modelMapper.map(subject, SubjectOutputDTO.class);
+            subjectOutputDTO.setId_student(student.getId_student());
+            listDTO.add(subjectOutputDTO);
+        });
+
+        return listDTO;
+
+    }
 
 }

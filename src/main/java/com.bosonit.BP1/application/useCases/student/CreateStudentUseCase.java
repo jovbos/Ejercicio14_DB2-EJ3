@@ -14,9 +14,6 @@ import com.bosonit.BP1.infracstructure.dtos.student.StudentOutputDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -62,6 +59,6 @@ public class CreateStudentUseCase implements CreateStudentPort {
             studentOutputDTO.setId_student(student.getId_student());
 
             return studentOutputDTO;
-        } else throw new CustomErrorRequest404("STUDENT ALREADY REGISTERED");
+        } else throw new CustomErrorRequest404("PERSON ALREADY REGISTERED");
     }
 }

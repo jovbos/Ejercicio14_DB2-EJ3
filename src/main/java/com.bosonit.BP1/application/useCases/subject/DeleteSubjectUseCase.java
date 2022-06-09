@@ -23,7 +23,10 @@ public class DeleteSubjectUseCase implements DeleteSubjectPort {
     if (repository.findById(id).isEmpty()) throw new CustomErrorRequest404("NOT_FOUND");
     else {
           Subject subject = repository.findById(id).orElseThrow(() -> new Exception("Assignment not registered."));
+
+          if (subject.getStudent() == null)
           repository.delete(subject);
+          else throw new Exception("THIS SUBJECT IS ALREADY ON COURSE");
 
           return ResponseEntity.ok().build();
         }

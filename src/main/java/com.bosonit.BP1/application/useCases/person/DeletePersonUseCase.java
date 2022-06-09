@@ -22,10 +22,14 @@ public class DeletePersonUseCase implements DeletePersonPort {
     public ResponseEntity<PersonOutputDTO> deletePerson(Integer id)  throws Exception {
     if (repository.findById(id).isEmpty()) throw new CustomErrorRequest404("NOT_FOUND");
     else {
-          Person person = repository.findById(id).orElseThrow(() -> new Exception("Person not registered."));
-          repository.delete(person);
 
-          return ResponseEntity.ok().build();
+        Person person = repository.findById(id).orElseThrow(() -> new Exception("Person not registered."));
+
+        if (person.getStudent() == null & person.getProfessor() == null)
+        repository.delete(person);
+        else throw new Exception("YOU MUST DELETE STUDENT/PROFESSOR DATA");
+
+        return ResponseEntity.ok().build();
         }
     }
 }
