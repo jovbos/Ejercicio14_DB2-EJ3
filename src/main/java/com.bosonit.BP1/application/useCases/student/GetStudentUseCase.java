@@ -2,11 +2,8 @@ package com.bosonit.BP1.application.useCases.student;
 
 import com.bosonit.BP1.application.exceptions.exception404.CustomErrorRequest404;
 import com.bosonit.BP1.application.ports.student.GetStudentPort;
-import com.bosonit.BP1.domain.entities.Person;
-import com.bosonit.BP1.domain.entities.Professor;
 import com.bosonit.BP1.domain.entities.Student;
 import com.bosonit.BP1.domain.entities.Subject;
-import com.bosonit.BP1.domain.repositories.PersonRepository;
 import com.bosonit.BP1.domain.repositories.StudentRepository;
 import com.bosonit.BP1.infracstructure.dtos.person.PersonOutputDTO;
 import com.bosonit.BP1.infracstructure.dtos.student.StudentFullOutputDTO;
@@ -38,7 +35,6 @@ public class GetStudentUseCase implements GetStudentPort {
             studentFullOutputDTO.setId_person(student.getPerson().getId());
             studentFullOutputDTO.setId_professor(student.getProfessor().getId_professor());
             studentFullOutputDTO.setPerson(modelMapper.map(student.getPerson(), PersonOutputDTO.class));
-
 
             return ResponseEntity.ok().body(studentFullOutputDTO);
 
@@ -73,7 +69,6 @@ public class GetStudentUseCase implements GetStudentPort {
 
         studentList.forEach(subject -> {
             SubjectOutputDTO subjectOutputDTO = modelMapper.map(subject, SubjectOutputDTO.class);
-            subjectOutputDTO.setId_student(student.getId_student());
             listDTO.add(subjectOutputDTO);
         });
 

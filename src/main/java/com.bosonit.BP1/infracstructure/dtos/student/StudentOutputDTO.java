@@ -1,6 +1,5 @@
 package com.bosonit.BP1.infracstructure.dtos.student;
 
-import com.bosonit.BP1.domain.entities.Professor;
 import lombok.Data;
 
 @Data
@@ -17,8 +16,5 @@ public class StudentOutputDTO {
     private String id_professor;
 
     private String branch;
-
-//    private List<Subject> subjects;
-
 
 }

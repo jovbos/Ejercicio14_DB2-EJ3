@@ -13,6 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -23,24 +25,20 @@ public class CreateSubjectUseCase implements CreateSubjectPort {
     ModelMapper modelMapper;
 
     @Autowired
-    SubjectRepository repository;
+    SubjectRepository subjectRepository;
 
     @Autowired
     StudentRepository studentRepository;
 
-    public SubjectOutputDTO addSubject(SubjectInputDTO subjectDTO){
+    public SubjectOutputDTO addSubject(SubjectInputDTO subjectDTO) throws Exception{
 
-        Optional<Student> student =  studentRepository.findById(subjectDTO.getId_student());
         Subject subject = modelMapper.map(subjectDTO, Subject.class);
+        if (subjectDTO.getInitial_date() == null)
+            throw new CustomErrorRequest422("UNPROCCESABLE_ENTITY");
 
-        if (student.isEmpty()) throw new CustomErrorRequest404("STUDENT NOT FOUND");
-        if (subject.getInitial_date() == null)
-        throw new CustomErrorRequest422("UNPROCCESABLE_ENTITY");
+        else subjectRepository.save(subject);
 
-        subject.setStudent(student.get());
-        repository.save(subject);
-        SubjectOutputDTO subjectOutputDTO = modelMapper.map(subjectDTO, SubjectOutputDTO.class);
-        subjectOutputDTO.setId_subject(subject.getId_subject());
+        SubjectOutputDTO subjectOutputDTO = modelMapper.map(subject, SubjectOutputDTO.class);
 
         return subjectOutputDTO;
     }

@@ -27,7 +27,7 @@ public class DeletePersonUseCase implements DeletePersonPort {
 
         if (person.getStudent() == null & person.getProfessor() == null)
         repository.delete(person);
-        else throw new Exception("YOU MUST DELETE STUDENT/PROFESSOR DATA");
+        else throw new Exception("YOU MUST DELETE STUDENT/PROFESSOR DATA FIRST");
 
         return ResponseEntity.ok().build();
         }
